@@ -1,75 +1,132 @@
-# For Login & Testing :
-  Demo link : https://frontend-amber-tau-20.vercel.app
-  Username : test@gmail.com
-  Password : Test@123
+# **Decentralized Marketplace with Smart Contract Escrow System**  
 
-# Getting Started with Create React App
+## **Overview**  
+Traditional e-commerce platforms face issues such as:
+- Lack of transparency in transactions.
+- Centralized control over listings, payments, and fees.
+- Fraudulent activities, including disputes over payments and product authenticity.  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Our project solves these problems by building a **decentralized e-commerce marketplace** that ensures **trustless and transparent transactions using blockchain and smart contracts**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## **Key Features**  
+✅ **Decentralized Trustless Transactions**: Removes intermediaries, enabling direct buyer-seller interaction.  
+✅ **Escrow Protection**: Payments are held securely until both parties confirm transaction completion.  
+✅ **Real-Time Bidding**: A fair auction system for competitive product pricing.  
+✅ **Blockchain Transparency**: Immutable records ensure fraud prevention.  
+✅ **Secure Smart Contracts**: Automates transactions and dispute resolution.  
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **Technology Stack**
+| Layer       | Technology Used |
+|-------------|----------------|
+| **Frontend** | React.js, Vite, MetaMask Integration |
+| **Backend**  | Node.js, Express.js, MongoDB |
+| **Blockchain** | Solidity (Smart Contracts), Ethers.js |
+| **Network** | Sepolia Testnet (Ethereum) |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## **Project Architecture**  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### **1. User Flow**
+1. **User Authentication & Wallet Connection**:  
+   - Users sign in and connect their MetaMask wallet.  
 
-### `npm run build`
+2. **Product Listing**:  
+   - Sellers add products via the smart contract.  
+   - Products are listed on the blockchain with unique IDs.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Bidding & Purchase**:  
+   - Buyers place bids or purchase directly using ETH and DeK tokens.  
+   - Funds are locked in an **escrow smart contract** for security.  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Transaction Completion**:  
+   - Payment is **released** once the buyer confirms product receipt.  
+   - In case of **dispute**, funds remain locked until resolved.  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## **Smart Contracts**
+### **1. `DeKToken.sol`**  
+- Implements an **ERC-20** token.  
+- Used for transactions, cashback rewards, and premium access.  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **2. `Marketplace.sol`**  
+- **Manages product listings**, bidding, and purchases.  
+- **Interacts with Escrow.sol** to secure payments.  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **3. `Escrow.sol`**  
+- Holds **ETH and DeK tokens** in escrow.  
+- Prevents fraud by ensuring funds are only released upon buyer confirmation.  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## **How to Run the Project**  
 
-## Learn More
+### **1. Clone the Repository**  
+```sh
+git clone https://github.com/yourusername/decentralized-marketplace.git
+cd decentralized-marketplace
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **2. Install Dependencies**  
+```sh
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### **3. Compile & Deploy Smart Contracts**  
+```sh
+npx hardhat compile
+npx hardhat run scripts/deploy.js --network sepolia
+```
 
-### Code Splitting
+### **4. Run the Frontend**
+```sh
+npm run dev
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## **Smart Contract Interactions**
+### **1. Adding a Product**
+```js
+await marketplace.addProduct("Laptop", "Electronics", ethers.parseEther("2"));
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### **2. Buyer Purchases Product**
+```js
+await marketplace.connect(buyer).buyProduct(1, ethers.parseEther("5"), { value: ethers.parseEther("0.5") });
+```
 
-### Making a Progressive Web App
+### **3. Seller Confirms & Withdraws Funds**
+```js
+await escrow.releaseFunds();
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## **Impact of the Project**  
+### **On Users**  
+- **Buyers**: Secure payments, fraud prevention, and transparent transactions.  
+- **Sellers**: Direct access to customers without high platform fees.  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### **On Society**  
+- Encourages **decentralization in e-commerce**.  
+- Promotes **trustless transactions**, reducing reliance on centralized entities.  
 
-### Deployment
+### **On the Market**  
+- Disrupts traditional platforms by **eliminating intermediaries**.  
+- Provides a **cost-effective** and **secure** alternative to centralized marketplaces.  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## **Future Enhancements**
+🚀 **Decentralized Dispute Resolution**  
+🚀 **Cross-Chain Payment Support**  
+🚀 **Integration of NFTs for Product Ownership**  
+🚀 **AI-based Reputation System for Buyers & Sellers**  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
